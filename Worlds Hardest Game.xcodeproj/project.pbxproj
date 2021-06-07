@@ -16,6 +16,9 @@
 		5B497050266DBFEF00436BDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B49704F266DBFEF00436BDD /* Assets.xcassets */; };
 		5B49705B266DBFEF00436BDD /* Worlds_Hardest_GameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B49705A266DBFEF00436BDD /* Worlds_Hardest_GameTests.swift */; };
 		5B497066266DBFEF00436BDD /* Worlds_Hardest_GameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B497065266DBFEF00436BDD /* Worlds_Hardest_GameUITests.swift */; };
+		5B497078266DC28A00436BDD /* PlayerStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B497077266DC28A00436BDD /* PlayerStateMachine.swift */; };
+		5B4D8292266DCB3800E0F899 /* Level1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4D8291266DCB3800E0F899 /* Level1.swift */; };
+		5B4D8297266DD22B00E0F899 /* Level1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5B4D8296266DD22B00E0F899 /* Level1.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		5B497061266DBFEF00436BDD /* Worlds Hardest GameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Worlds Hardest GameUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B497065266DBFEF00436BDD /* Worlds_Hardest_GameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worlds_Hardest_GameUITests.swift; sourceTree = "<group>"; };
 		5B497067266DBFEF00436BDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B497077266DC28A00436BDD /* PlayerStateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerStateMachine.swift; sourceTree = "<group>"; };
+		5B4D8291266DCB3800E0F899 /* Level1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level1.swift; sourceTree = "<group>"; };
+		5B4D8296266DD22B00E0F899 /* Level1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level1.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,10 +107,11 @@
 		5B497041266DBFEE00436BDD /* Worlds Hardest Game */ = {
 			isa = PBXGroup;
 			children = (
+				5B4D8285266DCAF700E0F899 /* Levels */,
+				5B49707C266DC8DE00436BDD /* Basic Layout */,
+				5B497076266DC28A00436BDD /* Player States */,
 				5B497042266DBFEE00436BDD /* AppDelegate.swift */,
-				5B497044266DBFEE00436BDD /* GameScene.sks */,
 				5B497046266DBFEE00436BDD /* Actions.sks */,
-				5B497048266DBFEE00436BDD /* GameScene.swift */,
 				5B49704A266DBFEE00436BDD /* GameViewController.swift */,
 				5B49704C266DBFEE00436BDD /* Main.storyboard */,
 				5B49704F266DBFEF00436BDD /* Assets.xcassets */,
@@ -129,6 +136,40 @@
 				5B497067266DBFEF00436BDD /* Info.plist */,
 			);
 			path = "Worlds Hardest GameUITests";
+			sourceTree = "<group>";
+		};
+		5B497076266DC28A00436BDD /* Player States */ = {
+			isa = PBXGroup;
+			children = (
+				5B497077266DC28A00436BDD /* PlayerStateMachine.swift */,
+			);
+			path = "Player States";
+			sourceTree = "<group>";
+		};
+		5B49707C266DC8DE00436BDD /* Basic Layout */ = {
+			isa = PBXGroup;
+			children = (
+				5B497044266DBFEE00436BDD /* GameScene.sks */,
+				5B497048266DBFEE00436BDD /* GameScene.swift */,
+			);
+			path = "Basic Layout";
+			sourceTree = "<group>";
+		};
+		5B4D8285266DCAF700E0F899 /* Levels */ = {
+			isa = PBXGroup;
+			children = (
+				5B4D8290266DCB3000E0F899 /* Level 1 */,
+			);
+			path = Levels;
+			sourceTree = "<group>";
+		};
+		5B4D8290266DCB3000E0F899 /* Level 1 */ = {
+			isa = PBXGroup;
+			children = (
+				5B4D8291266DCB3800E0F899 /* Level1.swift */,
+				5B4D8296266DD22B00E0F899 /* Level1.sks */,
+			);
+			path = "Level 1";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,6 +279,7 @@
 				5B497045266DBFEE00436BDD /* GameScene.sks in Resources */,
 				5B497050266DBFEF00436BDD /* Assets.xcassets in Resources */,
 				5B497047266DBFEE00436BDD /* Actions.sks in Resources */,
+				5B4D8297266DD22B00E0F899 /* Level1.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,8 +304,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B4D8292266DCB3800E0F899 /* Level1.swift in Sources */,
 				5B497049266DBFEE00436BDD /* GameScene.swift in Sources */,
 				5B49704B266DBFEE00436BDD /* GameViewController.swift in Sources */,
+				5B497078266DC28A00436BDD /* PlayerStateMachine.swift in Sources */,
 				5B497043266DBFEE00436BDD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
