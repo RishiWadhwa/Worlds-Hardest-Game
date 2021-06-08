@@ -19,6 +19,7 @@
 		5B497078266DC28A00436BDD /* PlayerStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B497077266DC28A00436BDD /* PlayerStateMachine.swift */; };
 		5B4D8292266DCB3800E0F899 /* Level1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4D8291266DCB3800E0F899 /* Level1.swift */; };
 		5B4D8297266DD22B00E0F899 /* Level1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5B4D8296266DD22B00E0F899 /* Level1.sks */; };
+		5B75AF3A266F1EAA000323EE /* BasicCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B75AF39266F1EAA000323EE /* BasicCode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		5B497077266DC28A00436BDD /* PlayerStateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerStateMachine.swift; sourceTree = "<group>"; };
 		5B4D8291266DCB3800E0F899 /* Level1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level1.swift; sourceTree = "<group>"; };
 		5B4D8296266DD22B00E0F899 /* Level1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level1.sks; sourceTree = "<group>"; };
+		5B75AF39266F1EAA000323EE /* BasicCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicCode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 		5B4D8285266DCAF700E0F899 /* Levels */ = {
 			isa = PBXGroup;
 			children = (
+				5B75AF38266F1E9A000323EE /* Basic Copy Code */,
 				5B4D8290266DCB3000E0F899 /* Level 1 */,
 			);
 			path = Levels;
@@ -170,6 +173,14 @@
 				5B4D8296266DD22B00E0F899 /* Level1.sks */,
 			);
 			path = "Level 1";
+			sourceTree = "<group>";
+		};
+		5B75AF38266F1E9A000323EE /* Basic Copy Code */ = {
+			isa = PBXGroup;
+			children = (
+				5B75AF39266F1EAA000323EE /* BasicCode.swift */,
+			);
+			path = "Basic Copy Code";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B4D8292266DCB3800E0F899 /* Level1.swift in Sources */,
+				5B75AF3A266F1EAA000323EE /* BasicCode.swift in Sources */,
 				5B497049266DBFEE00436BDD /* GameScene.swift in Sources */,
 				5B49704B266DBFEE00436BDD /* GameViewController.swift in Sources */,
 				5B497078266DC28A00436BDD /* PlayerStateMachine.swift in Sources */,

@@ -34,10 +34,20 @@ class jumpingState: playerState {
         return false
     }
     
+    var jumpArray = [SKTexture]()
+    lazy var action = {SKAction.repeatForever(.animate(with: jumpArray, timePerFrame: 0.1))} ()
+    
     override func didEnter(from previousState: GKState?) {
+        let set = (0..<2).map({return "jump/\($0)"})
+        for img in set {
+            jumpArray.append(SKTexture.init(imageNamed: img))
+        }
+        
+        player.removeAction(forKey: characterAnimationKey)
+        player.run(action, withKey: characterAnimationKey)
         
         hasFinished = false
-        player.run(.applyForce(CGVector(dx: 0, dy: 200), duration: 0.1))
+        player.run(.applyForce(CGVector(dx: 0, dy: 2000), duration: 0.1))
         
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { (timer) in
             self.hasFinished = true
@@ -70,7 +80,7 @@ class idleState: playerState {
         }
     }
     
-    let textures = SKTexture(imageNamed: "character")
+    let textures = SKTexture(imageNamed: "walk/0")
     lazy var action = {SKAction.animate(with: [textures], timePerFrame: 0.1)} ()
     
     override func didEnter(from previousState: GKState?) {
@@ -89,9 +99,17 @@ class walkingState: playerState {
         }
     }
     
+    var walkArray = [SKTexture]()
+    lazy var action = {SKAction.repeatForever(.animate(with: walkArray, timePerFrame: 0.1))} ()
+    
     override func didEnter(from previousState: GKState?) {
+        let set = (0..<6).map({return "walk/\($0)"})
+        for img in set {
+            walkArray.append(SKTexture.init(imageNamed: img))
+        }
         
         player.removeAction(forKey: characterAnimationKey)
+        player.run(action, withKey: characterAnimationKey)
     }
 }
 
