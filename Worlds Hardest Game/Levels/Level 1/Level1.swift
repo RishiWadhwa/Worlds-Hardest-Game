@@ -67,7 +67,7 @@ class Level1: SKScene, SKPhysicsContactDelegate {
         heartContainer.zPosition = 100000
         
         self.addChild(heartContainer)
-        fillHeartContainer(5)
+        fillHeartContainer(7)
         
         fakeFloor = childNode(withName: "fakeGround")
         
@@ -237,6 +237,9 @@ extension Level1 {
         )
         
         resetTraps()
+        
+        playerStateMachine.enter(landingState.self)
+        playerStateMachine.enter(idleState.self)
     }
     
     func showGameOver() {
@@ -341,6 +344,21 @@ extension Level1 {
             playerStateMachine.enter(idleState.self)
         } else if (collision.matches(.ground, .player)) {
             playerStateMachine.enter(landingState.self)
+        } else if (collision.matches(.player, .endKey)) {
+            nextLevel()
         }
+    }
+}
+
+
+//MARK: Next Level
+extension Level1 {
+    func nextLevel() {
+        let level2 = Level2(fileNamed: "Level2")
+        level2?.scaleMode = .aspectFill
+        
+        let transition = SKTransition.moveIn(with: .right, duration: 0.5)
+        
+        self.view?.presentScene(level2!, transition: transition)
     }
 }

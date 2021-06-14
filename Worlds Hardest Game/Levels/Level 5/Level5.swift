@@ -1,5 +1,5 @@
 //
-//  BasicCode.swift
+//  Level5.swift
 //  Worlds Hardest Game
 //
 //  Created by Rishi Wadhwa on 6/6/21.
@@ -8,13 +8,7 @@
 import SpriteKit
 import GameplayKit
 
-class BasicCode: SKScene, SKPhysicsContactDelegate {
-    
-    //trap variables activating and resetting
-    
-    
-    //trap variables corresponding to nodes on scene
-    
+class Level5: SKScene, SKPhysicsContactDelegate {
     
     //reward at the end
     var rewardIsNotTouched = true
@@ -26,6 +20,10 @@ class BasicCode: SKScene, SKPhysicsContactDelegate {
     var player: SKNode?
     let playerSpeed = 4
     var playerIsRight = true
+    
+    //fake keys
+    var lvl3: SKNode?
+    var lvl1: SKNode?
     
     //joystick
     var joystickAction = false
@@ -46,6 +44,8 @@ class BasicCode: SKScene, SKPhysicsContactDelegate {
     //trap contacts
     var isHit = false
     
+    
+    
     override func didMove(to view: SKView) {
         scene?.scaleMode = .aspectFill
         physicsWorld.contactDelegate = self
@@ -60,8 +60,11 @@ class BasicCode: SKScene, SKPhysicsContactDelegate {
         heartContainer.position = CGPoint(x: (-400), y: 200)
         heartContainer.zPosition = 100000
         
+        lvl1 = childNode(withName: "key1")
+        lvl3 = childNode(withName: "key3")
+        
         self.addChild(heartContainer)
-        fillHeartContainer(5)
+        fillHeartContainer(7)
         
         playerStateMachine = GKStateMachine(states: [
             jumpingState(playerNode: player!),
@@ -76,7 +79,7 @@ class BasicCode: SKScene, SKPhysicsContactDelegate {
 }
 
 //MARK: Update For Walking
-extension BasicCode {
+extension Level5 {
     override func update(_ currentTime: TimeInterval) {
         rewardIsNotTouched = true
         
@@ -118,23 +121,33 @@ extension BasicCode {
         
         player?.run(faceAction)
         
-        //reset trap loc
-        
-        //check for player location in order to activate traps
+        if let pos = player?.position {
+            let rect1 = CGRect(x: lvl1!.position.x, y: lvl1!.position.y, width: lvl1!.frame.width, height: lvl1!.frame.height)
+            let rect2 = CGRect(x: lvl3!.position.x, y: lvl3!.position.y, width: lvl3!.frame.width, height: lvl3!.frame.height)
+            
+            if (rect1.contains(pos)) {
+                let level1 = SKScene(fileNamed: "Level1")
+                level1?.scaleMode = .aspectFill
+                
+                let trans = SKTransition.moveIn(with: .left, duration: 0.5)
+                self.view?.presentScene(level1!, transition: trans)
+            } else if (rect2.contains(pos)) {
+                let level3 = SKScene(fileNamed: "Level3")
+                level3?.scaleMode = .aspectFill
+                
+                let trans = SKTransition.moveIn(with: .left, duration: 0.5)
+                self.view?.presentScene(level3!, transition: trans)
+            }
+        }
     }
 }
 
-//MARK: Trap Actions
-extension BasicCode {
-    //create trap functions
-    
-    func resetTraps() {
-        //reset traps
-    }
+//MARK: Trapped Locations
+extension Level5 {
+    //nothing - weird level
 }
-
 //MARK: Lives - Lose + Gain
-extension BasicCode {
+extension Level5 {
     func fillHeartContainer(_ count: Int) {
         for index in 1...count {
             let heart = SKSpriteNode(imageNamed: "heart")
@@ -148,6 +161,7 @@ extension BasicCode {
     
     func loseLife() {
         if isHit {
+            
             let lastElementIndex = heartArray.count-1
             if heartArray.indices.contains(lastElementIndex-1) {
                 let lastHeart = heartArray[lastElementIndex]
@@ -170,7 +184,7 @@ extension BasicCode {
         playerStateMachine.enter(idleState.self)
         
         player?.physicsBody?.categoryBitMask = 0
-        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { timer in
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { timer in
             self.player?.physicsBody?.categoryBitMask = 2
         }
         
@@ -183,21 +197,20 @@ extension BasicCode {
                 ]), count: 4)
         )
         
+        
         playerStateMachine.enter(landingState.self)
         playerStateMachine.enter(idleState.self)
     }
     
     func showGameOver() {
-        resetTraps()
-        
-        let gameOver = BasicCode(fileNamed: "BasicCode")
+        let gameOver = Level5(fileNamed: "Level5")
         gameOver?.scaleMode = .aspectFill
         self.view?.presentScene(gameOver)
     }
 }
 
 //MARK: Touches
-extension BasicCode {
+extension Level5 {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             if let joystickKnob = knob {
@@ -246,7 +259,7 @@ extension BasicCode {
 }
 
 //MARK: Action Methods
-extension BasicCode {
+extension Level5 {
     func resetKnobPosition() {
         let initialPoint: CGPoint = CGPoint(x: 0, y: 0)
         let moveBack = SKAction.move(to: initialPoint, duration: 0.1)
@@ -261,7 +274,7 @@ extension BasicCode {
 }
 
 //MARK: Physics Methods
-extension BasicCode {
+extension Level5 {
     struct Collision {
         enum Masks: Int {
             case trap, player, endKey, ground
@@ -297,16 +310,15 @@ extension BasicCode {
     }
 }
 
+
 //MARK: Next Level
-extension BasicCode {
+extension Level5 {
     func nextLevel() {
-        resetTraps()
-        
-        let BasicCode1 = BasicCode(fileNamed: "BasicCode")
-        BasicCode1?.scaleMode = .aspectFill
+        let level2 = Level6(fileNamed: "Level6")
+        level2?.scaleMode = .aspectFill
         
         let transition = SKTransition.moveIn(with: .right, duration: 0.5)
         
-        self.view?.presentScene(BasicCode1!, transition: transition)
+        self.view?.presentScene(level2!, transition: transition)
     }
 }

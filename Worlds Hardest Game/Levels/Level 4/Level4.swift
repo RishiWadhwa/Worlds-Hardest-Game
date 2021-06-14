@@ -1,5 +1,5 @@
 //
-//  BasicCode.swift
+//  Level4.swift
 //  Worlds Hardest Game
 //
 //  Created by Rishi Wadhwa on 6/6/21.
@@ -8,13 +8,7 @@
 import SpriteKit
 import GameplayKit
 
-class BasicCode: SKScene, SKPhysicsContactDelegate {
-    
-    //trap variables activating and resetting
-    
-    
-    //trap variables corresponding to nodes on scene
-    
+class Level4: SKScene, SKPhysicsContactDelegate {
     
     //reward at the end
     var rewardIsNotTouched = true
@@ -46,6 +40,22 @@ class BasicCode: SKScene, SKPhysicsContactDelegate {
     //trap contacts
     var isHit = false
     
+    //trapped floors
+    var fakeFloor: SKNode?
+    var floorRotate: SKNode?
+    var pushTrap: SKNode?
+    
+    //hidden traps
+    var hiddenTrap: SKNode?
+    var wallTrap: SKNode?
+    
+    //trap release booleans
+    var floorAlive = true
+    var floorTrapHidden = true
+    var wallTrapHidden = true
+    var floorIsNotRotated = true
+    var pushTrapNotPushed = true
+    
     override func didMove(to view: SKView) {
         scene?.scaleMode = .aspectFill
         physicsWorld.contactDelegate = self
@@ -61,7 +71,18 @@ class BasicCode: SKScene, SKPhysicsContactDelegate {
         heartContainer.zPosition = 100000
         
         self.addChild(heartContainer)
-        fillHeartContainer(5)
+        fillHeartContainer(7)
+        
+        fakeFloor = childNode(withName: "fakeGround")
+        
+        hiddenTrap = childNode(withName: "sneakyTrap")
+        hiddenTrap?.alpha = 0
+        wallTrap = childNode(withName: "hiddenTrap")
+        wallTrap?.alpha = 0
+        
+        floorRotate = childNode(withName: "rotateGround")
+        pushTrap = childNode(withName: "hiddenTrap1")
+        pushTrap?.alpha = 0
         
         playerStateMachine = GKStateMachine(states: [
             jumpingState(playerNode: player!),
@@ -76,7 +97,7 @@ class BasicCode: SKScene, SKPhysicsContactDelegate {
 }
 
 //MARK: Update For Walking
-extension BasicCode {
+extension Level4 {
     override func update(_ currentTime: TimeInterval) {
         rewardIsNotTouched = true
         
@@ -116,25 +137,90 @@ extension BasicCode {
             }
         }
         
+        if (floorAlive && wallTrapHidden && floorTrapHidden) {
+            resetTraps()
+        } else if (player!.position.x < -400) {
+            resetTraps()
+        }
+        
         player?.run(faceAction)
         
-        //reset trap loc
-        
-        //check for player location in order to activate traps
+        if (player!.position.x >= -120 && floorAlive) {
+            if (floorAlive) {
+                removeFloorTrap()
+            }
+        } else if (player!.position.x >= 60 && floorIsNotRotated) {
+            rotateFloor()
+        } else if (player!.position.x >= 200 && floorTrapHidden) {
+            if (floorTrapHidden) {
+                releaseFloorHiddenTrap()
+            }
+        } else if (player!.position.x >= 260 && pushTrapNotPushed) {
+            pushOutTrap()
+        } else if (player!.position.x >= 375 && wallTrapHidden) {
+            if (wallTrapHidden) {
+                pushOutWallTrap()
+            }
+        }
     }
 }
 
-//MARK: Trap Actions
-extension BasicCode {
-    //create trap functions
+//MARK: Trapped Locations
+extension Level4 {
+    func pushOutTrap() {
+        pushTrap?.alpha = 1
+        pushTrapNotPushed = false
+    }
+    
+    func undoPushTrap() {
+        pushTrap?.alpha = 0
+        pushTrapNotPushed = true
+    }
+    
+    func rotateFloor() {
+        floorRotate?.run(SKAction.rotate(byAngle: (CGFloat.pi/2), duration: 0.1))
+        floorIsNotRotated = false
+    }
+    
+    func rotateFloorBack() {
+        floorRotate?.run(SKAction.rotate(byAngle: -(CGFloat.pi/2), duration: 0.1))
+        floorIsNotRotated = true
+    }
+    
+    func releaseFloorHiddenTrap() {
+        hiddenTrap?.alpha = 1
+        floorTrapHidden = false
+    }
+    
+    func pushOutWallTrap() {
+        wallTrap?.alpha = 1
+        wallTrapHidden = false
+    }
+    
+    func removeFloorTrap() {
+        fakeFloor?.alpha = 0
+        fakeFloor?.position.y = 200
+        
+        floorAlive = false
+    }
     
     func resetTraps() {
-        //reset traps
+        fakeFloor?.position.y = 2
+        fakeFloor?.alpha = 1
+        wallTrap?.alpha = 0
+        hiddenTrap?.alpha = 0
+        
+        floorAlive = true
+        floorTrapHidden = true
+        wallTrapHidden = true
+        
+        rotateFloorBack()
+        undoPushTrap()
     }
 }
 
 //MARK: Lives - Lose + Gain
-extension BasicCode {
+extension Level4 {
     func fillHeartContainer(_ count: Int) {
         for index in 1...count {
             let heart = SKSpriteNode(imageNamed: "heart")
@@ -148,6 +234,8 @@ extension BasicCode {
     
     func loseLife() {
         if isHit {
+            resetTraps()
+            
             let lastElementIndex = heartArray.count-1
             if heartArray.indices.contains(lastElementIndex-1) {
                 let lastHeart = heartArray[lastElementIndex]
@@ -170,7 +258,7 @@ extension BasicCode {
         playerStateMachine.enter(idleState.self)
         
         player?.physicsBody?.categoryBitMask = 0
-        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { timer in
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { timer in
             self.player?.physicsBody?.categoryBitMask = 2
         }
         
@@ -183,21 +271,21 @@ extension BasicCode {
                 ]), count: 4)
         )
         
+        resetTraps()
+        
         playerStateMachine.enter(landingState.self)
         playerStateMachine.enter(idleState.self)
     }
     
     func showGameOver() {
-        resetTraps()
-        
-        let gameOver = BasicCode(fileNamed: "BasicCode")
+        let gameOver = Level4(fileNamed: "Level4")
         gameOver?.scaleMode = .aspectFill
         self.view?.presentScene(gameOver)
     }
 }
 
 //MARK: Touches
-extension BasicCode {
+extension Level4 {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             if let joystickKnob = knob {
@@ -246,7 +334,7 @@ extension BasicCode {
 }
 
 //MARK: Action Methods
-extension BasicCode {
+extension Level4 {
     func resetKnobPosition() {
         let initialPoint: CGPoint = CGPoint(x: 0, y: 0)
         let moveBack = SKAction.move(to: initialPoint, duration: 0.1)
@@ -261,7 +349,7 @@ extension BasicCode {
 }
 
 //MARK: Physics Methods
-extension BasicCode {
+extension Level4 {
     struct Collision {
         enum Masks: Int {
             case trap, player, endKey, ground
@@ -297,16 +385,15 @@ extension BasicCode {
     }
 }
 
+
 //MARK: Next Level
-extension BasicCode {
+extension Level4 {
     func nextLevel() {
-        resetTraps()
-        
-        let BasicCode1 = BasicCode(fileNamed: "BasicCode")
-        BasicCode1?.scaleMode = .aspectFill
+        let level2 = Level5(fileNamed: "Level5")
+        level2?.scaleMode = .aspectFill
         
         let transition = SKTransition.moveIn(with: .right, duration: 0.5)
         
-        self.view?.presentScene(BasicCode1!, transition: transition)
+        self.view?.presentScene(level2!, transition: transition)
     }
 }
