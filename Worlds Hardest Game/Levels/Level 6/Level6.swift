@@ -243,7 +243,7 @@ extension Level6 {
     }
     
     func showGameOver() {
-        let gameOver = Level6(fileNamed: "Level6")
+        let gameOver = GameOver(fileNamed: "GameOver")
         gameOver?.scaleMode = .aspectFill
         self.view?.presentScene(gameOver)
     }

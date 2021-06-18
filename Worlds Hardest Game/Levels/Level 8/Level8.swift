@@ -52,6 +52,9 @@ class Level8: SKScene, SKPhysicsContactDelegate {
     var floorTrapHidden = true
     var wallTrapHidden = true
     
+    var bottomTrap: SKNode?
+    var topGround: SKNode?
+    
     override func didMove(to view: SKView) {
         scene?.scaleMode = .aspectFill
         physicsWorld.contactDelegate = self
@@ -67,9 +70,9 @@ class Level8: SKScene, SKPhysicsContactDelegate {
         heartContainer.zPosition = 100000
         
         self.addChild(heartContainer)
-        fillHeartContainer(5)
+        fillHeartContainer(7)
         
-        fakeFloor = childNode(withName: "fakeGround")
+        fakeFloor = childNode(withName: "moveGround")
         
         hiddenTrap = childNode(withName: "sneakyTrap")
         hiddenTrap?.alpha = 0
@@ -85,6 +88,9 @@ class Level8: SKScene, SKPhysicsContactDelegate {
         ])
         
         playerStateMachine.enter(idleState.self)
+        
+        topGround = childNode(withName: "topGround")
+        bottomTrap = childNode(withName: "bottomTrap")
     }
 }
 
@@ -137,7 +143,7 @@ extension Level8 {
         
         player?.run(faceAction)
         
-        if (player!.position.x >= 275 && floorTrapHidden) {
+        if (player!.position.x >= 75 && floorTrapHidden) {
             if (floorTrapHidden) {
                 releaseFloorHiddenTrap()
             }
@@ -145,7 +151,7 @@ extension Level8 {
             if (wallTrapHidden) {
                 pushOutWallTrap()
             }
-        } else if (player!.position.x >= -120 && floorAlive) {
+        } else if (player!.position.x >= -160 && floorAlive) {
             if (floorAlive) {
                 removeFloorTrap()
             }
@@ -166,15 +172,14 @@ extension Level8 {
     }
     
     func removeFloorTrap() {
-        fakeFloor?.alpha = 0
-        fakeFloor?.position.x = 700
-        
+        topGround?.position.y = 25
+        bottomTrap?.position.y = -12
         floorAlive = false
     }
     
     func resetTraps() {
-        fakeFloor?.position.x = -105
-        fakeFloor?.alpha = 1
+        topGround?.position.y = 425
+        bottomTrap?.position.y = 388
         wallTrap?.alpha = 0
         hiddenTrap?.alpha = 0
         
@@ -243,7 +248,7 @@ extension Level8 {
     }
     
     func showGameOver() {
-        let gameOver = Level8(fileNamed: "Level8")
+        let gameOver = GameOver(fileNamed: "GameOver")
         gameOver?.scaleMode = .aspectFill
         self.view?.presentScene(gameOver)
     }

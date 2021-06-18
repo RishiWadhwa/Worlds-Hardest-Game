@@ -67,9 +67,10 @@ class Level9: SKScene, SKPhysicsContactDelegate {
         heartContainer.zPosition = 100000
         
         self.addChild(heartContainer)
-        fillHeartContainer(5)
+        fillHeartContainer(7)
         
         fakeFloor = childNode(withName: "fakeGround")
+        fakeFloor?.alpha = 0
         
         hiddenTrap = childNode(withName: "sneakyTrap")
         hiddenTrap?.alpha = 0
@@ -145,7 +146,7 @@ extension Level9 {
             if (wallTrapHidden) {
                 pushOutWallTrap()
             }
-        } else if (player!.position.x >= -120 && floorAlive) {
+        } else if (player!.position.x >= -310 && floorAlive) {
             if (floorAlive) {
                 removeFloorTrap()
             }
@@ -166,15 +167,13 @@ extension Level9 {
     }
     
     func removeFloorTrap() {
-        fakeFloor?.alpha = 0
-        fakeFloor?.position.x = 700
+        fakeFloor?.alpha = 1
         
         floorAlive = false
     }
     
     func resetTraps() {
-        fakeFloor?.position.x = -105
-        fakeFloor?.alpha = 1
+        fakeFloor?.alpha = 0
         wallTrap?.alpha = 0
         hiddenTrap?.alpha = 0
         
@@ -243,7 +242,7 @@ extension Level9 {
     }
     
     func showGameOver() {
-        let gameOver = Level9(fileNamed: "Level9")
+        let gameOver = GameOver(fileNamed: "GameOver")
         gameOver?.scaleMode = .aspectFill
         self.view?.presentScene(gameOver)
     }

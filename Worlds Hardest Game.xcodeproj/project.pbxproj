@@ -21,6 +21,12 @@
 		5B4D8297266DD22B00E0F899 /* Level1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5B4D8296266DD22B00E0F899 /* Level1.sks */; };
 		5B75AF3A266F1EAA000323EE /* BasicCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B75AF39266F1EAA000323EE /* BasicCode.swift */; };
 		5B75AF3D266FCB47000323EE /* Level2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B75AF3C266FCB47000323EE /* Level2.swift */; };
+		5B7D7BCF267AFB420075207A /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7D7BCE267AFB420075207A /* Title.swift */; };
+		5B7D7BD1267AFB4A0075207A /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7D7BD0267AFB4A0075207A /* GameOver.swift */; };
+		5B7D7BD3267AFB5A0075207A /* Title.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5B7D7BD2267AFB5A0075207A /* Title.sks */; };
+		5B7D7BD5267AFB630075207A /* GameOver.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5B7D7BD4267AFB630075207A /* GameOver.sks */; };
+		5B7D7BD7267B07630075207A /* Win.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7D7BD6267B07630075207A /* Win.swift */; };
+		5B7D7BD9267B076E0075207A /* Win.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5B7D7BD8267B076E0075207A /* Win.sks */; };
 		5B8597E0266FD08B00372912 /* Level2.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5B8597DF266FD08B00372912 /* Level2.sks */; };
 		5B8597FA2670000800372912 /* Level8.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5B8597E32670000700372912 /* Level8.sks */; };
 		5B8597FB2670000800372912 /* Level8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8597E42670000700372912 /* Level8.swift */; };
@@ -78,6 +84,13 @@
 		5B4D8296266DD22B00E0F899 /* Level1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level1.sks; sourceTree = "<group>"; };
 		5B75AF39266F1EAA000323EE /* BasicCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicCode.swift; sourceTree = "<group>"; };
 		5B75AF3C266FCB47000323EE /* Level2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level2.swift; sourceTree = "<group>"; };
+		5B7D7BCE267AFB420075207A /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
+		5B7D7BD0267AFB4A0075207A /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
+		5B7D7BD2267AFB5A0075207A /* Title.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Title.sks; sourceTree = "<group>"; };
+		5B7D7BD4267AFB630075207A /* GameOver.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOver.sks; sourceTree = "<group>"; };
+		5B7D7BD6267B07630075207A /* Win.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Win.swift; sourceTree = "<group>"; };
+		5B7D7BD8267B076E0075207A /* Win.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Win.sks; sourceTree = "<group>"; };
+		5B7D7BDA267BB4C70075207A /* Worlds Hardest Game.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Worlds Hardest Game.entitlements"; sourceTree = "<group>"; };
 		5B8597DF266FD08B00372912 /* Level2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level2.sks; sourceTree = "<group>"; };
 		5B8597E32670000700372912 /* Level8.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level8.sks; sourceTree = "<group>"; };
 		5B8597E42670000700372912 /* Level8.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level8.swift; sourceTree = "<group>"; };
@@ -145,6 +158,7 @@
 		5B497041266DBFEE00436BDD /* Worlds Hardest Game */ = {
 			isa = PBXGroup;
 			children = (
+				5B7D7BDA267BB4C70075207A /* Worlds Hardest Game.entitlements */,
 				5B4D8285266DCAF700E0F899 /* Levels */,
 				5B49707C266DC8DE00436BDD /* Basic Layout */,
 				5B497076266DC28A00436BDD /* Player States */,
@@ -196,6 +210,7 @@
 		5B4D8285266DCAF700E0F899 /* Levels */ = {
 			isa = PBXGroup;
 			children = (
+				5B7D7BCD267AFB2C0075207A /* Main Scenes */,
 				5B75AF38266F1E9A000323EE /* Basic Copy Code */,
 				5B4D8290266DCB3000E0F899 /* Level 1 */,
 				5B75AF3B266FCB38000323EE /* Level 2 */,
@@ -235,6 +250,19 @@
 				5B8597DF266FD08B00372912 /* Level2.sks */,
 			);
 			path = "Level 2";
+			sourceTree = "<group>";
+		};
+		5B7D7BCD267AFB2C0075207A /* Main Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				5B7D7BCE267AFB420075207A /* Title.swift */,
+				5B7D7BD0267AFB4A0075207A /* GameOver.swift */,
+				5B7D7BD2267AFB5A0075207A /* Title.sks */,
+				5B7D7BD4267AFB630075207A /* GameOver.sks */,
+				5B7D7BD6267B07630075207A /* Win.swift */,
+				5B7D7BD8267B076E0075207A /* Win.sks */,
+			);
+			path = "Main Scenes";
 			sourceTree = "<group>";
 		};
 		5B8597E22670000700372912 /* Level 8 */ = {
@@ -420,6 +448,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B7D7BD3267AFB5A0075207A /* Title.sks in Resources */,
+				5B7D7BD5267AFB630075207A /* GameOver.sks in Resources */,
 				5B8598092670000800372912 /* Level7.sks in Resources */,
 				5B49704E266DBFEE00436BDD /* Main.storyboard in Resources */,
 				5B8597E0266FD08B00372912 /* Level2.sks in Resources */,
@@ -431,6 +461,7 @@
 				5B8597FE2670000800372912 /* Level9.sks in Resources */,
 				5B8597FA2670000800372912 /* Level8.sks in Resources */,
 				5B8597FD2670000800372912 /* Level6.sks in Resources */,
+				5B7D7BD9267B076E0075207A /* Win.sks in Resources */,
 				5B8598002670000800372912 /* Level10.sks in Resources */,
 				5B8598032670000800372912 /* Level3.sks in Resources */,
 				5B8598072670000800372912 /* Level5.sks in Resources */,
@@ -458,6 +489,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B7D7BD7267B07630075207A /* Win.swift in Sources */,
 				5B8598082670000800372912 /* Level7.swift in Sources */,
 				5B8597FF2670000800372912 /* Level9.swift in Sources */,
 				5B8597FC2670000800372912 /* Level6.swift in Sources */,
@@ -466,6 +498,8 @@
 				5B8598012670000800372912 /* Level10.swift in Sources */,
 				5B497049266DBFEE00436BDD /* GameScene.swift in Sources */,
 				5B8598062670000800372912 /* Level5.swift in Sources */,
+				5B7D7BCF267AFB420075207A /* Title.swift in Sources */,
+				5B7D7BD1267AFB4A0075207A /* GameOver.swift in Sources */,
 				5B8598022670000800372912 /* Level3.swift in Sources */,
 				5B49704B266DBFEE00436BDD /* GameViewController.swift in Sources */,
 				5B497078266DC28A00436BDD /* PlayerStateMachine.swift in Sources */,
@@ -640,6 +674,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Worlds Hardest Game/Worlds Hardest Game.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7B6A868M7K;
 				INFOPLIST_FILE = "Worlds Hardest Game/Info.plist";
@@ -659,6 +694,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Worlds Hardest Game/Worlds Hardest Game.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7B6A868M7K;
 				INFOPLIST_FILE = "Worlds Hardest Game/Info.plist";

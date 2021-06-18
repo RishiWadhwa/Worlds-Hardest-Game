@@ -40,18 +40,6 @@ class Level10: SKScene, SKPhysicsContactDelegate {
     //trap contacts
     var isHit = false
     
-    //trapped floors
-    var fakeFloor: SKNode?
-    
-    //hidden traps
-    var hiddenTrap: SKNode?
-    var wallTrap: SKNode?
-    
-    //trap release booleans
-    var floorAlive = true
-    var floorTrapHidden = true
-    var wallTrapHidden = true
-    
     override func didMove(to view: SKView) {
         scene?.scaleMode = .aspectFill
         physicsWorld.contactDelegate = self
@@ -67,14 +55,7 @@ class Level10: SKScene, SKPhysicsContactDelegate {
         heartContainer.zPosition = 100000
         
         self.addChild(heartContainer)
-        fillHeartContainer(5)
-        
-        fakeFloor = childNode(withName: "fakeGround")
-        
-        hiddenTrap = childNode(withName: "sneakyTrap")
-        hiddenTrap?.alpha = 0
-        wallTrap = childNode(withName: "hiddenTrap")
-        wallTrap?.alpha = 0
+        fillHeartContainer(7)
         
         playerStateMachine = GKStateMachine(states: [
             jumpingState(playerNode: player!),
@@ -129,58 +110,7 @@ extension Level10 {
             }
         }
         
-        if (floorAlive && wallTrapHidden && floorTrapHidden) {
-            resetTraps()
-        } else if (player!.position.x < -400) {
-            resetTraps()
-        }
-        
         player?.run(faceAction)
-        
-        if (player!.position.x >= 275 && floorTrapHidden) {
-            if (floorTrapHidden) {
-                releaseFloorHiddenTrap()
-            }
-        } else if (player!.position.x >= 375 && wallTrapHidden) {
-            if (wallTrapHidden) {
-                pushOutWallTrap()
-            }
-        } else if (player!.position.x >= -120 && floorAlive) {
-            if (floorAlive) {
-                removeFloorTrap()
-            }
-        }
-    }
-}
-
-//MARK: Trapped Locations
-extension Level10 {
-    func releaseFloorHiddenTrap() {
-        hiddenTrap?.alpha = 1
-        floorTrapHidden = false
-    }
-    
-    func pushOutWallTrap() {
-        wallTrap?.alpha = 1
-        wallTrapHidden = false
-    }
-    
-    func removeFloorTrap() {
-        fakeFloor?.alpha = 0
-        fakeFloor?.position.x = 700
-        
-        floorAlive = false
-    }
-    
-    func resetTraps() {
-        fakeFloor?.position.x = -105
-        fakeFloor?.alpha = 1
-        wallTrap?.alpha = 0
-        hiddenTrap?.alpha = 0
-        
-        floorAlive = true
-        floorTrapHidden = true
-        wallTrapHidden = true
     }
 }
 
@@ -199,7 +129,6 @@ extension Level10 {
     
     func loseLife() {
         if isHit {
-            resetTraps()
             
             let lastElementIndex = heartArray.count-1
             if heartArray.indices.contains(lastElementIndex-1) {
@@ -236,14 +165,13 @@ extension Level10 {
                 ]), count: 4)
         )
         
-        resetTraps()
         
         playerStateMachine.enter(landingState.self)
         playerStateMachine.enter(idleState.self)
     }
     
     func showGameOver() {
-        let gameOver = Level10(fileNamed: "Level10")
+        let gameOver = GameOver(fileNamed: "GameOver")
         gameOver?.scaleMode = .aspectFill
         self.view?.presentScene(gameOver)
     }
@@ -354,7 +282,7 @@ extension Level10 {
 //MARK: Next Level
 extension Level10 {
     func nextLevel() {
-        let level2 = Level10(fileNamed: "Level10")
+        let level2 = Win(fileNamed: "Win")
         level2?.scaleMode = .aspectFill
         
         let transition = SKTransition.moveIn(with: .right, duration: 0.5)
