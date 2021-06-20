@@ -7,6 +7,12 @@
 
 import Foundation
 import SpriteKit
+import AVFoundation
+
+var AudioPlayer = AVAudioPlayer()
+let levelUrl = NSURL(fileURLWithPath: Bundle.main.path(forResource: "Next Level", ofType: "mp3")!)
+let deathUrl = NSURL(fileURLWithPath: Bundle.main.path(forResource: "Life Lost", ofType: "mp3")!)
+let dungeonUrl = NSURL(fileURLWithPath: Bundle.main.path(forResource: "Dungeon Vibe", ofType: "mp3")!)
 
 class Title: SKScene {
     var playButton: SKNode?
@@ -16,6 +22,8 @@ class Title: SKScene {
         
         playButton = childNode(withName: "playButton")
         playButton?.zPosition = 1000
+        
+        helper.playDungeon()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -27,7 +35,7 @@ class Title: SKScene {
                 let trans = SKTransition.doorsOpenVertical(withDuration: 0.25)
                 
                 gameover?.scaleMode = .aspectFill
-                self.view?.presentScene(gameover!, transition: trans)
+                self.view?.presentScene(gameover!, transition: trans)                                
             }
         }
     }

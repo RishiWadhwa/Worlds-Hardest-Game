@@ -44,6 +44,8 @@ class Level10: SKScene, SKPhysicsContactDelegate {
         scene?.scaleMode = .aspectFill
         physicsWorld.contactDelegate = self
         
+        helper.playDungeon()
+        
         player = childNode(withName: "player")
         
         joystick = childNode(withName: "joystick")
@@ -168,6 +170,8 @@ extension Level10 {
         
         playerStateMachine.enter(landingState.self)
         playerStateMachine.enter(idleState.self)
+        
+        helper.playDungeon()
     }
     
     func showGameOver() {
@@ -261,6 +265,8 @@ extension Level10 {
         let collision = Collision(mask: (contact.bodyA.categoryBitMask, contact.bodyB.categoryBitMask))
         
         if (collision.matches(.trap, .player)) {
+            helper.playLoseLife()
+            
             playerStateMachine.enter(landingState.self)
             
             let die = SKAction.move(to: CGPoint(x: -404, y: 29), duration: 0)
@@ -282,6 +288,8 @@ extension Level10 {
 //MARK: Next Level
 extension Level10 {
     func nextLevel() {
+        helper.playNextLevel()
+        
         let level2 = Win(fileNamed: "Win")
         level2?.scaleMode = .aspectFill
         

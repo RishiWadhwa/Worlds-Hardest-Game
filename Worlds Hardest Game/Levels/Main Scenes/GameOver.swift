@@ -16,6 +16,8 @@ class GameOver: SKScene {
         
         homeButton = childNode(withName: "homeButton")
         homeButton?.zPosition = 1000
+        
+        helper.playDungeon()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

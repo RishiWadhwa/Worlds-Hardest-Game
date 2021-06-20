@@ -44,6 +44,10 @@
 		5B8598072670000800372912 /* Level5.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5B8597F62670000800372912 /* Level5.sks */; };
 		5B8598082670000800372912 /* Level7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8597F82670000800372912 /* Level7.swift */; };
 		5B8598092670000800372912 /* Level7.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5B8597F92670000800372912 /* Level7.sks */; };
+		5BC45DBD267EEAC100C26BC0 /* helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC45DBC267EEAC100C26BC0 /* helper.swift */; };
+		5BC45DC1267EF0DB00C26BC0 /* Dungeon Vibe.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5BC45DBE267EF0DA00C26BC0 /* Dungeon Vibe.mp3 */; };
+		5BC45DC2267EF0DB00C26BC0 /* Next Level.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5BC45DBF267EF0DB00C26BC0 /* Next Level.mp3 */; };
+		5BC45DC3267EF0DB00C26BC0 /* Life Lost.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5BC45DC0267EF0DB00C26BC0 /* Life Lost.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +112,10 @@
 		5B8597F62670000800372912 /* Level5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level5.sks; sourceTree = "<group>"; };
 		5B8597F82670000800372912 /* Level7.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level7.swift; sourceTree = "<group>"; };
 		5B8597F92670000800372912 /* Level7.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level7.sks; sourceTree = "<group>"; };
+		5BC45DBC267EEAC100C26BC0 /* helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = helper.swift; sourceTree = "<group>"; };
+		5BC45DBE267EF0DA00C26BC0 /* Dungeon Vibe.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Dungeon Vibe.mp3"; sourceTree = "<group>"; };
+		5BC45DBF267EF0DB00C26BC0 /* Next Level.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Next Level.mp3"; sourceTree = "<group>"; };
+		5BC45DC0267EF0DB00C26BC0 /* Life Lost.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Life Lost.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +218,8 @@
 		5B4D8285266DCAF700E0F899 /* Levels */ = {
 			isa = PBXGroup;
 			children = (
+				5BC45DBB267EEAB500C26BC0 /* Helpers */,
+				5BC45DB4267EE5F800C26BC0 /* Music */,
 				5B7D7BCD267AFB2C0075207A /* Main Scenes */,
 				5B75AF38266F1E9A000323EE /* Basic Copy Code */,
 				5B4D8290266DCB3000E0F899 /* Level 1 */,
@@ -345,6 +355,24 @@
 			path = "Worlds Hardest Game/Levels/Level 7";
 			sourceTree = SOURCE_ROOT;
 		};
+		5BC45DB4267EE5F800C26BC0 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				5BC45DBE267EF0DA00C26BC0 /* Dungeon Vibe.mp3 */,
+				5BC45DC0267EF0DB00C26BC0 /* Life Lost.mp3 */,
+				5BC45DBF267EF0DB00C26BC0 /* Next Level.mp3 */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
+		5BC45DBB267EEAB500C26BC0 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				5BC45DBC267EEAC100C26BC0 /* helper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -452,6 +480,8 @@
 				5B7D7BD5267AFB630075207A /* GameOver.sks in Resources */,
 				5B8598092670000800372912 /* Level7.sks in Resources */,
 				5B49704E266DBFEE00436BDD /* Main.storyboard in Resources */,
+				5BC45DC1267EF0DB00C26BC0 /* Dungeon Vibe.mp3 in Resources */,
+				5BC45DC3267EF0DB00C26BC0 /* Life Lost.mp3 in Resources */,
 				5B8597E0266FD08B00372912 /* Level2.sks in Resources */,
 				5B497045266DBFEE00436BDD /* GameScene.sks in Resources */,
 				5B497050266DBFEF00436BDD /* Assets.xcassets in Resources */,
@@ -464,6 +494,7 @@
 				5B7D7BD9267B076E0075207A /* Win.sks in Resources */,
 				5B8598002670000800372912 /* Level10.sks in Resources */,
 				5B8598032670000800372912 /* Level3.sks in Resources */,
+				5BC45DC2267EF0DB00C26BC0 /* Next Level.mp3 in Resources */,
 				5B8598072670000800372912 /* Level5.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -495,6 +526,7 @@
 				5B8597FC2670000800372912 /* Level6.swift in Sources */,
 				5B4D8292266DCB3800E0F899 /* Level1.swift in Sources */,
 				5B75AF3A266F1EAA000323EE /* BasicCode.swift in Sources */,
+				5BC45DBD267EEAC100C26BC0 /* helper.swift in Sources */,
 				5B8598012670000800372912 /* Level10.swift in Sources */,
 				5B497049266DBFEE00436BDD /* GameScene.swift in Sources */,
 				5B8598062670000800372912 /* Level5.swift in Sources */,
